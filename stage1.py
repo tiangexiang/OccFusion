@@ -10,12 +10,6 @@
 #
 
 import os
-os.environ['HF_HOME'] = '/vision/group/occnerf/genhuman/hf_cache/'
-os.environ['HF_HUB_CACHE'] = '/vision/group/occnerf/genhuman/hf_cache/'
-os.environ['TRANSFORMERS_CACHE'] = '//vision/group/occnerf/genhuman/hf_cache/'
-os.environ['GRADIO_TEMP_DIR'] = '/vision/group/occnerf/genhuman/hf_cache/'
-
-
 import copy
 import torch
 from random import randint
@@ -23,11 +17,8 @@ from utils.loss_utils import l1_loss, l2_loss, ssim
 from gaussian_renderer import render, network_gui
 import sys
 from scene import Scene, GaussianModel
-from scene.disc_dataloader import AlphaImageDataset
 from utils.general_utils import safe_state
 from utils.graphics_utils import getWorld2View2, getProjectionMatrix, getProjectionMatrix_refine
-import uuid
-import imageio
 import numpy as np
 import cv2
 import pickle
@@ -39,9 +30,6 @@ from matplotlib import pyplot as plt
 from arguments import ModelParams, PipelineParams, OptimizationParams
 from PIL import Image
 
-    
-TENSORBOARD_FOUND = False
-
 import lpips
 loss_fn_vgg = lpips.LPIPS(net='vgg').to(torch.device('cuda', torch.cuda.current_device()))
 
@@ -49,7 +37,10 @@ import time
 import torch.nn.functional as F
 
 from guidance.op_utils import StableDiffusion
-# from guidance.sd_utils import StableDiffusion as OriginalStableDiffusion
+
+TENSORBOARD_FOUND = False
+
+
 
 def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from,
              can_sds_w, pose_sds_w, can_guidance, pose_guidance):

@@ -1,14 +1,3 @@
-#
-# Copyright (C) 2023, Inria
-# GRAPHDECO research group, https://team.inria.fr/graphdeco
-# All rights reserved.
-#
-# This software is free for non-commercial, research and evaluation use 
-# under the terms of the LICENSE.md file.
-#
-# For inquiries contact  george.drettakis@inria.fr
-#
-
 import torch
 from scene import Scene
 from scene.cameras import orbit_camera
@@ -26,11 +15,7 @@ from gaussian_renderer import GaussianModel
 import numpy as np
 from utils.image_utils import psnr
 from utils.loss_utils import ssim
-from utils.graphics_utils import getWorld2View2, getProjectionMatrix, getProjectionMatrix_refine
-from utils.graphics_utils import focal2fov, fov2focal
 
-# import lpips
-# loss_fn_vgg = lpips.LPIPS(net='vgg').to(torch.device('cuda', torch.cuda.current_device()))
 
 def render_set(model_path, name, iteration, views, gaussians, pipeline, background, canonical=False, canonical_pose=False):
     render_path = os.path.join(model_path, name, "{}".format(iteration), "renders")
@@ -38,10 +23,6 @@ def render_set(model_path, name, iteration, views, gaussians, pipeline, backgrou
 
     makedirs(render_path, exist_ok=True)
     makedirs(gts_path, exist_ok=True)
-
-    # Load data (deserialize)
-    with open(model_path + '/smpl_rot/' + f'iteration_{iteration}/' + 'smpl_rot.pickle', 'rb') as handle:
-        smpl_rot = pickle.load(handle)
 
     rgbs = []
     rgbs_gt = []
@@ -95,16 +76,12 @@ def render_set(model_path, name, iteration, views, gaussians, pipeline, backgrou
 def render_sets(dataset : ModelParams, iteration : int, pipeline : PipelineParams, skip_train : bool, skip_test : bool, canonical : bool, canonical_pose : bool):
     with torch.no_grad():
 
-        #print('???', dataset.model_path, dataset.exp_name)
-
         gaussians = GaussianModel(dataset.sh_degree, dataset.smpl_type, dataset.motion_offset_flag, dataset.actor_gender)
         scene = Scene(dataset, gaussians, load_iteration=iteration, shuffle=False)
 
         bg_color = [1,1,1] if dataset.white_background else [0, 0, 0]
         background = torch.tensor(bg_color, dtype=torch.float32, device="cuda")
-
-
-        
+   
 
         if not skip_train:
              render_set(dataset.model_path, "train", scene.loaded_iter, scene.getTrainCameras(), gaussians, pipeline, background, canonical, canonical_pose)

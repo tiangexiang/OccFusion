@@ -1,13 +1,7 @@
 import os
-os.environ['HF_HOME'] = '/vision/group/occnerf/genhuman/hf_cache/'
-os.environ['HF_HUB_CACHE'] = '/vision/group/occnerf/genhuman/hf_cache/'
-os.environ['TRANSFORMERS_CACHE'] = '//vision/group/occnerf/genhuman/hf_cache/'
-os.environ['GRADIO_TEMP_DIR'] = '/vision/group/occnerf/genhuman/hf_cache/'
 import cv2
 import sys
-sys.path.insert(0, '/vision/u/xtiange/wildnerf/vid2avatar/preprocessing/')
-sys.path.insert(0, '/vision/u/xtiange/genhuman/gen-human/')
-from preprocessing_utils import (smpl_to_pose, PerspectiveCamera, Renderer, render_trimesh_depth, render_trimesh, \
+from utils.preprocessing_utils import (smpl_to_pose, PerspectiveCamera, Renderer, render_trimesh_depth, render_trimesh, \
                                 estimate_translation_cv2, transform_smpl)
 from utils.pose_utils import draw_poses
 from scene.cameras import orbit_camera
@@ -19,13 +13,10 @@ from PIL import Image
 from diffusers import StableDiffusionXLControlNetInpaintPipeline, StableDiffusionControlNetPipeline, ControlNetModel, UniPCMultistepScheduler, StableDiffusionControlNetInpaintPipeline
 import torch
 import numpy as np
-from controlnet_aux import OpenposeDetector
-from diffusers.utils import load_image
 import trimesh
 import cv2
 import argparse
 
-# from smpl.smpl_numpy import SMPL
 from smplx import SMPL
 
 

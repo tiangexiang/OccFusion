@@ -10,11 +10,6 @@
 #
 
 import os
-os.environ['HF_HOME'] = '/vision/group/occnerf/genhuman/hf_cache/'
-os.environ['HF_HUB_CACHE'] = '/vision/group/occnerf/genhuman/hf_cache/'
-os.environ['TRANSFORMERS_CACHE'] = '//vision/group/occnerf/genhuman/hf_cache/'
-os.environ['GRADIO_TEMP_DIR'] = '/vision/group/occnerf/genhuman/hf_cache/'
-
 import copy
 import torch
 from random import randint
@@ -24,8 +19,6 @@ import sys
 from scene import Scene, GaussianModel
 from utils.general_utils import safe_state
 from utils.graphics_utils import getWorld2View2, getProjectionMatrix, getProjectionMatrix_refine
-import uuid
-import imageio
 import numpy as np
 import cv2
 import pickle
@@ -43,6 +36,8 @@ import lpips
 loss_fn_vgg = lpips.LPIPS(net='vgg').to(torch.device('cuda', torch.cuda.current_device()))
 
 TENSORBOARD_FOUND = False
+
+
 
 def training(dataset, opt, pipe, testing_iterations, saving_iterations, checkpoint_iterations, checkpoint, debug_from,
              mask_scale, l1_scale, gen_lpips_scale, gen_l2_scale):
