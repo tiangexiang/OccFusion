@@ -10,4 +10,4 @@ SUBJECT="0011_1"
 # SUBJECT="0039"
 # SUBJECT="0041"
 
-python render.py -m output/ocmotion/${SUBJECT} --exp_name ocmotion/${SUBJECT} --motion_offset_flag --iteration $((OPTIM_NUM_ITER+NUM_ITER)) --white_background --skip_test 
+python render.py -m output/ocmotion/${SUBJECT} --gen_root oc_generations/ --exp_name ocmotion/${SUBJECT} --motion_offset_flag --iteration $((OPTIM_NUM_ITER+NUM_ITER)) --white_background --skip_test 
