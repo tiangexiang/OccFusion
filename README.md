@@ -31,12 +31,13 @@ For details, please refer to our <a href="https://arxiv.org/pdf/2407.00316" targ
 <div align="left">
 
 ## Environment
-To start with, please clone our envrionment:
+To start with, please clone our envrionment and install necessary dependencies:
 
 ```bash
     conda env create -f environment.yml
     pip install submodules/diff-gaussian-rasterization
     pip install submodules/simple-knn
+    pip install "git+https://github.com/facebookresearch/pytorch3d.git"
 ```
 ## Data and Necessary Assets
 
@@ -91,6 +92,15 @@ The training of OccFusion consists of 4 sequential stages. Stage 0 and 2 are opt
 
 We provide our precomputed generations (to replicate our results in the paper) to be downloaded [here](https://drive.google.com/file/d/158wWKXhHWk-p9Y-hUTkB6YgZ2Wg1K1Oe/view?usp=sharing). Please unzip and put the `oc_generations/` folder directly on the root directory. Stage 0 and 2 can be skipped if use our computations. 
 
+### (optional) Setting Cache Directory for Hugging Face Models
+
+Before training, we highly recommend to specify a customised directory for caching hugging face models, which will be downloaded automatically at the first run of the training scripts. 
+
+```bash
+export HF_HOME="YOUR_DIRECTORY" 
+export HF_HUB_CACHE="YOUR_DIRECTORY"
+```
+
 ### (optional) Stage 0 
 
 Run Stage 0 to segment binary masks for complete humans to be generated from stable diffusion models. To run Stage 0 on a OcMotion sequence, uncomment the corresponding `SUBJECT` varaible and
@@ -133,6 +143,12 @@ At Stage 1 and 3, a rendering process will be trigered automatically after the t
 ```bash
 source render.sh
 ``` 
+
+## Acknowledgement  
+
+This code base is built upon [GauHuman](https://github.com/skhu101/GauHuman). SDS guidances are borrowed from [DreamGaussian](https://github.com/dreamgaussian/dreamgaussian). 
+
+*Check also our prior works on occluded human rendering! [OccNeRF](https://cs.stanford.edu/~xtiange/projects/occnerf/) and [Wild2Avatar](https://cs.stanford.edu/~xtiange/projects/wild2avatar/).*
 
 ## Citation  
 <!-- --- -->
