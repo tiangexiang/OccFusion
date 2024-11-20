@@ -3,11 +3,11 @@
 <h1>OccFusion: Rendering Occluded Humans with Generative Diffusion Priors</h1>
 
 <div>
-    <a href="https://adamsunn.github.io/" target="_blank">Adam Sun*</a>;
-    <a href="https://ai.stanford.edu/~xtiange/" target="_blank">Tiange Xiang*</a>;
+    <a href="https://adamsunn.github.io/" target="_blank">Adam Sun</a>*;
+    <a href="https://ai.stanford.edu/~xtiange/" target="_blank">Tiange Xiang</a>*;
     <a href="https://profiles.stanford.edu/scott-delp" target="_blank">Scott Delp</a>;
-    <a href="https://profiles.stanford.edu/fei-fei-li" target="_blank">Li Fei-Fei^</a>;
-    <a href="https://profiles.stanford.edu/ehsan-adeli" target="_blank">Ehsan Adeli^</a>;
+    <a href="https://profiles.stanford.edu/fei-fei-li" target="_blank">Li Fei-Fei</a>^;
+    <a href="https://profiles.stanford.edu/ehsan-adeli" target="_blank">Ehsan Adeli</a>^
 </div>
 <div>
     <em> * Equal contributions; Junior author listed first. </em>
